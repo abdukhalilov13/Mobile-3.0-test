@@ -1,0 +1,41 @@
+uses crt;
+
+var
+  N, i, k, j: integer;
+  a: array[1..10000] of integer;
+
+begin
+  readln(N);
+  if (N >= 2) and (N <= 10000) then begin
+    for i := 1 to N do
+      read(a[i]);
+    k := 1;
+    for i := 1 to N do
+    begin
+      if (a[i] mod 3) = 0 then begin
+        a[N + 1] := a[k]; a[k] := a[i]; a[i] := a[N + 1];
+        k := k + 1;
+      end;
+    end;
+    for i := 1 to k do
+    begin
+      for j := i to k - 1 do
+      begin
+        if a[i] > a[j] then begin
+          a[N + 1] := a[j]; a[j] := a[i]; a[i] := a[N + 1];
+        end;
+      end;
+    end;
+    for i := k to N do
+    begin
+      for j := i to N do
+      begin
+        if a[i] > a[j] then begin
+          a[N + 1] := a[j]; a[j] := a[i]; a[i] := a[N + 1];
+        end;
+      end;
+    end;
+    for i := 1 to N do 
+      write(a[i], ' ');
+  end;
+end.
